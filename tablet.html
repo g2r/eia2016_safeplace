@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="hold-transition skin-blue layout-top-nav">
+    <!-- HEADER -->
+    <div class="row">
+        <!-- logo -->
+        <div class="col-sm-6">
+            <img src="dist/img/logo_01.png" alt="SafePlace Logo" height="60" width="60">  SafePlace Remote Terminal
+        </div>
+        <!-- room -->
+        <div class="col-sm-6" style="font-size:40px;">
+            TOTEM 154
+        </div>
+        
+    </div>
+    <!-- CONTENT -->
+    <div class="row">
+        <!-- LEFT -->
+        <div class="col-sm-6">
+            <!-- notification -->
+            <div class="row">
+                <div>
+                    <div class="col-sm-12">
+                  <div class="info-box bg-green">
+                    <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+                    <div class="info-box-content">
+                      <br>
+                      <span class="info-box-number">ROOM SECURE</span>
+
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                </div>
+            </div>
+            <!-- login -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box box-widget widget-user">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header bg-aqua-active">
+                          <h3 class="widget-user-username">Matteo Paracchino</h3>
+                          <h5 class="widget-user-desc">Web Developer</h5>
+                        </div>
+                        <div class="widget-user-image">
+                          <img class="img-circle" src="dist/img/profile.jpg" alt="User Avatar">
+                        </div>
+                        <div class="box-footer">
+                          <div class="row">
+                            <div class="col-sm-4 border-right">
+                              <div class="description-block">
+                                <h5 class="description-header">19/07/2016 16:31:44</h5>
+                                <span class="description-text">CHECKIN</span>
+                              </div>
+                              <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 border-right">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4">
+                              <div class="description-block">
+                                <h5 class="description-header">19/072016 18:22:12</h5>
+                                <span class="description-text">CHECKOUT</span>
+                              </div>
+                              <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                          </div>
+                          <!-- /.row -->
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-6">
+            <!-- Clock -->
+            <div>
+                <p id="clock" style="font-size: 100px;"></p>
+                <p id="date" style="font-size:30px;"></p>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+    
+<!-- CLOCK SCRIPT -->    
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var weekday = new Array(7);
+        
+        weekday[0]=  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('clock').innerHTML =
+        h + ":" + m + ":" + s;
+        document.getElementById('date').innerHTML =
+        weekday[today.getDay()] + " " + today.getUTCDate() + "/" + today.getMonth() + "/" + today.getFullYear();
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+    startTime();
+</script>
+    
+
+    
+</html>
