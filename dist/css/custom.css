@@ -9,6 +9,10 @@
     text-align: center;
 }
 
+#workers, #alertCount{
+    font-size: 36px;
+}
+
  /* ----------------------------- */
 
 #clock-box{

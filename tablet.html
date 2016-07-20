@@ -176,7 +176,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
             console.log(result.user, 'userStat');
             // user: -1 = bad login, 0 = not logged , 1 = User1
             if(result.user == -1){
-                 document.getElementById('login').innerHTML = '<div class="row">\
+                 document.getElementById('login').innerHTML = '<div class="stepwizard col-md-offset-3">\
+                 <div class="stepwizard-row setup-panel">\
+                   <div class="stepwizard-step">\
+                     <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>\
+                     <p>Login</p>\
+                   </div>\
+                   <div class="stepwizard-step">\
+                     <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>\
+                     <p>Boots</p>\
+                   </div>\
+                   <div class="stepwizard-step">\
+                     <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>\
+                     <p>Helmet</p>\
+                   </div>\
+                 </div>\
+               </div>\
+                 <div class="row">\
                  +<div class="col-sm-12"> <div class="box box-widget widget-user">\
                  +<div class="widget-user-header bg-red-active"> <h3 class="widget-user-username"></h3>\
                  + <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> \
