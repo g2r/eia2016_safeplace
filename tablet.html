@@ -18,6 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="dist/css/custom.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
@@ -34,94 +35,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <body class="hold-transition skin-blue layout-top-nav">
     <!-- HEADER -->
+    <div class="container">
     <div class="row">
         <!-- logo -->
-        <div class="col-sm-6">
-            <img src="dist/img/logo_01.png" alt="SafePlace Logo" height="60" width="60">  SafePlace Remote Terminal
+        <div class="col-md-7 col-sm-7">
+            <img src="dist/img/logo-horiz.jpg" alt="SafePlace Logo" height="60">
         </div>
         <!-- room -->
-        <div class="col-sm-6" style="font-size:40px;">
+        <div class="col-md-5 col-sm-5" style="font-size:40px;  text-align:center">
             TOTEM 154
         </div>
-        
+
     </div>
     <!-- CONTENT -->
     <div class="row">
         <!-- LEFT -->
-        <div class="col-sm-6">
+        <div class="col-md-7 col-sm-7">
             <!-- notification -->
-            <div class="row">
-                <div>
-                    <div class="col-sm-12">
-                  <div class="info-box bg-green">
-                    <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+            <div id="notification"></div>
 
-                    <div class="info-box-content">
-                      <br>
-                      <span class="info-box-number">ROOM SECURE</span>
-
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                </div>
-            </div>
             <!-- login -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box box-widget widget-user">
-                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                        <div class="widget-user-header bg-aqua-active">
-                          <h3 class="widget-user-username">Matteo Paracchino</h3>
-                          <h5 class="widget-user-desc">Web Developer</h5>
-                        </div>
-                        <div class="widget-user-image">
-                          <img class="img-circle" src="dist/img/profile.jpg" alt="User Avatar">
-                        </div>
-                        <div class="box-footer">
-                          <div class="row">
-                            <div class="col-sm-4 border-right">
-                              <div class="description-block">
-                                <h5 class="description-header">19/07/2016 16:31:44</h5>
-                                <span class="description-text">CHECKIN</span>
-                              </div>
-                              <!-- /.description-block -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-4 border-right">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-4">
-                              <div class="description-block">
-                                <h5 class="description-header">19/072016 18:22:12</h5>
-                                <span class="description-text">CHECKOUT</span>
-                              </div>
-                              <!-- /.description-block -->
-                            </div>
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </div>
-                      </div>
-                </div>
-            </div>
+            <div id="login"></div>
         </div>
 
         <!-- RIGHT -->
-        <div class="col-md-6">
+        <div class="col-md-5 col-sm-5">
             <!-- Clock -->
-            <div>
-                <p id="clock" style="font-size: 100px;"></p>
-                <p id="date" style="font-size:30px;"></p>
-            </div>
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Entrance time:</h3>
+                <div class="box-tools pull-right">
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                <div id="clock-box">
+                    <p id="clock" style="font-size: 5.5em;"></p>
+                    <p id="date" style="font-size:30px;"></p>
+                </div>
+              </div><!-- /.box-body -->
+              <div class="box-footer">
+                The footer of the box
+              </div><!-- box-footer -->
+            </div><!-- /.box -->
+
         </div>
     </div>
-    
-    
+
+</div><!--container --->
 </body>
-    
-<!-- CLOCK SCRIPT -->    
+
+<!-- CLOCK SCRIPT -->
 <script>
     function startTime() {
         var today = new Date();
@@ -129,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         var m = today.getMinutes();
         var s = today.getSeconds();
         var weekday = new Array(7);
-        
+
         weekday[0]=  "Sunday";
         weekday[1] = "Monday";
         weekday[2] = "Tuesday";
@@ -137,13 +100,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
-        
+
         m = checkTime(m);
         s = checkTime(s);
         document.getElementById('clock').innerHTML =
         h + ":" + m + ":" + s;
         document.getElementById('date').innerHTML =
-        weekday[today.getDay()] + " " + today.getUTCDate() + "/" + today.getMonth() + "/" + today.getFullYear();
+        weekday[today.getDay()] + ", " + today.getUTCDate() + "/" + today.getMonth() + "/" + today.getFullYear();
         var t = setTimeout(startTime, 500);
     }
     function checkTime(i) {
@@ -152,7 +115,143 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
     startTime();
 </script>
-    
 
-    
+<!-- DYNAMIC PAGE SCRIPT -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCHDsJoZ-vQgP5eBLIQOxaupHTZQEiHvKc",
+        authDomain: "firstlife-mashup-21may2016.firebaseapp.com",
+        databaseURL: "https://firstlife-mashup-21may2016.firebaseio.com",
+        storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+
+    //funzioni per EIA
+    function setStatusRoom(){
+        console.log("settingStatusRoom");
+        firebase.database().ref('eia').update({
+            "statusRoom": 2
+        });
+    }
+
+    function getStatusRoom(){
+        console.log("gettingStatusRoom");
+        firebase.database().ref('eia').on('value', function(snapshot) {
+			console.log("getStatusRoom result:" ,snapshot.val());
+            var result = snapshot.val();
+            console.log(result.statusRoom);
+            // statusRoom: 0 = OK , 1 = WARNING, 3 = ALERT
+            if(result.statusRoom == 0){
+                document.getElementById('notification').innerHTML = '<div class="row"> <div> <div class="col-sm-12"> <div class="info-box bg-green"> <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span> <div class="info-box-content"> <br><span class="info-box-number">ROOM SECURE</span> </div></div></div></div></div>';
+            }
+            else if(result.statusRoom == 1){
+                document.getElementById('notification').innerHTML = '<div class="row"> <div> <div class="col-sm-12"> <div class="info-box bg-yellow"> <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span> <div class="info-box-content"> <br><span class="info-box-number">WARNING IN THE ROOM</span> </div></div></div></div></div>';
+            }
+            else{
+                document.getElementById('notification').innerHTML = '<div class="row"> <div> <div class="col-sm-12"> <div class="info-box bg-red"> <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span> <div class="info-box-content"> <br><span class="info-box-number">ALERT IN THE ROOM</span> </div></div></div></div></div>';
+            }
+
+		});
+    }
+
+    //TO_DO???
+    function setLoginUser(){
+
+    }
+
+    function getLoginUser(){
+        console.log("gettingLoginUser");
+        firebase.database().ref('eia').on('value', function(snapshot) {
+		      	console.log("getLoginUser result:" ,snapshot.val());
+            result = snapshot.val();
+            //var result = {'user':1, 'stepLogin':2};
+            console.log(result);
+            console.log(result.user, 'userStat');
+            // user: -1 = bad login, 0 = not logged , 1 = User1
+            if(result.user == -1){
+                 document.getElementById('login').innerHTML = '<div class="row">\
+                 +<div class="col-sm-12"> <div class="box box-widget widget-user">\
+                 +<div class="widget-user-header bg-red-active"> <h3 class="widget-user-username"></h3>\
+                 + <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> \
+                 +<img class="img-circle" src="dist/img/logo_01.png" alt="Log In ">\
+                 +</div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;">\
+                 +<h2>Wrong LOGIN</h2> </div></div></div></div></div></div></div>';
+            }
+            else if(result.stepLogin == 0){
+                document.getElementById('login').innerHTML = '<div class="stepwizard col-md-offset-3">\
+                <div class="stepwizard-row setup-panel">\
+                  <div class="stepwizard-step">\
+                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>\
+                    <p>Login</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>\
+                    <p>Boots</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>\
+                    <p>Helmet</p>\
+                  </div>\
+                </div>\
+              </div>\
+              <div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-yellow-active"> <h3 class="widget-user-username"></h3> <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/logo_01.png" alt="Log In "> </div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;"><h2>Please swipe your badge.</h2> </div></div></div></div></div></div></div>';
+            }
+            else if(result.stepLogin == 1){
+                document.getElementById('login').innerHTML = '<div class="stepwizard col-md-offset-3">\
+                <div class="stepwizard-row setup-panel">\
+                  <div class="stepwizard-step">\
+                    <a href="#step-1" type="button" class="btn btn-default btn-circle">1</a>\
+                    <p>Login</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-2" type="button" class="btn btn-primary  btn-circle" disabled="disabled">2</a>\
+                    <p>Boots</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>\
+                    <p>Helmet</p>\
+                  </div>\
+                </div>\
+              </div>\
+              <div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-yellow-active"> <h3 class="widget-user-username"></h3> <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/logo_01.png" alt="Log In "> </div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;"><h2>Please, scan your boots</h2> </div></div></div></div></div></div></div>';
+            }
+            else if(result.stepLogin == 2){
+                document.getElementById('login').innerHTML = '<div class="stepwizard col-md-offset-3">\
+                <div class="stepwizard-row setup-panel">\
+                  <div class="stepwizard-step">\
+                    <a href="#step-1" type="button" class="btn btn-default btn-circle">1</a>\
+                    <p>Login</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>\
+                    <p>Boots</p>\
+                  </div>\
+                  <div class="stepwizard-step">\
+                    <a href="#step-3" type="button" class="btn  btn-primary btn-circle" disabled="disabled">3</a>\
+                    <p>Helmet</p>\
+                  </div>\
+                </div>\
+              </div>\
+              <div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-yellow-active"> <h3 class="widget-user-username"></h3> <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/logo_01.png" alt="Log In "> </div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;"><h2>Please, scan your helmet</h2> </div></div></div></div></div></div></div>';
+            }
+            else if(result.user == 1){
+                document.getElementById('login').innerHTML = '<div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-aqua-active"> <h3 class="widget-user-username">Matteo Paracchino</h3> <h5 class="widget-user-desc">Web Developer</h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/profile.jpg" alt="User Avatar"> </div><div class="box-footer"> <div class="row"> <div class="col-sm-4 border-right"> <div class="description-block"> <h5 class="description-header">19/07/2016 16:31:44</h5> <span class="description-text">CHECKIN</span> </div></div><div class="col-sm-4 border-right"> </div><div class="col-sm-4"> <div class="description-block"> <h5 class="description-header">19/072016 18:22:12</h5> <span class="description-text">CHECKOUT</span> </div></div></div></div></div></div></div>';
+            }
+
+        });
+    }
+
+    //auto start
+    getStatusRoom();
+    getLoginUser();
+</script>
+
+
 </html>

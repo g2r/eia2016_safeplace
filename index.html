@@ -275,9 +275,17 @@ desired effect
     </section>
     <!-- /.sidebar -->
   </aside>
-
+    
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+      
+      <!-- alert zone -->
+    <div class="callout callout-danger" id="alert">
+        <h4>ALERT</h4>
+        <p>There is a problem that you need to fix in the room 154.</p>
+    </div>
+      
+      
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -299,7 +307,7 @@ desired effect
 
             <div class="info-box-content">
               <span class="info-box-text">New Alert</span>
-              <span class="info-box-number">6</span>
+              <span class="info-box-number" id="alertCount"></span>
             </div>
           </div>  <!-- /.info-box-content -->
   </div>
@@ -311,7 +319,7 @@ desired effect
 
           <div class="info-box-content">
             <span class="info-box-text">Workers inside</span>
-            <span class="info-box-number">120</span>
+            <span class="info-box-number" id="workers"></span>
           </div>
         </div>  <!-- /.info-box-content -->
 
@@ -617,5 +625,94 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+    
+<!-- DYNAMIC PAGE SCRIPT -->
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>-->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCHDsJoZ-vQgP5eBLIQOxaupHTZQEiHvKc",
+        authDomain: "firstlife-mashup-21may2016.firebaseapp.com",
+        databaseURL: "https://firstlife-mashup-21may2016.firebaseio.com",
+        storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    // Get a reference to the database service
+    var database = firebase.database();
+    
+    
+    //funzioni per EIA
+    function setStatusRoom(){
+        console.log("settingStatusRoom");
+        firebase.database().ref('eia').update({
+            "statusRoom": 2
+        });
+    }
+    
+    function getStatusRoom(){
+        console.log("gettingStatusRoom");
+        firebase.database().ref('eia').on('value', function(snapshot) {
+			console.log("getStatusRoom result:" ,snapshot.val());
+            var result = snapshot.val();
+            console.log(result.statusRoom);
+            // statusRoom: 0 = OK , 1 = WARNING, 3 = ALERT
+            if(result.statusRoom == 0){
+                $('#alert').hide();
+                document.getElementById('alertCount').innerHTML = '6';
+            }
+            else if(result.statusRoom == 1){
+                $('#alert').hide();
+                document.getElementById('alertCount').innerHTML = '6';
+            }
+            else{
+                $('#alert').show();
+                document.getElementById('alertCount').innerHTML = '7';
+            }
+            
+		});
+    }
+    
+    //TO_DO???
+    function setLoginUser(){
+        
+    }
+    
+    function getLoginUser(){
+        console.log("gettingLoginUser");
+        firebase.database().ref('eia').on('value', function(snapshot) {
+			console.log("getLoginUser result:" ,snapshot.val());
+            var result = snapshot.val();
+            console.log(result.user);
+            // user: -1 = bad login, 0 = not logged , 1 = User1
+            /*
+            if(result.user == -1){
+                 document.getElementById('login').innerHTML = '<div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-red-active"> <h3 class="widget-user-username"></h3> <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/logo_01.png" alt="Log In "> </div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;"><h2>Wrong LOGIN</h2> </div></div></div></div></div></div></div>';
+            }
+            else if(result.user == 0){
+                document.getElementById('login').innerHTML = '<div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-yellow-active"> <h3 class="widget-user-username"></h3> <h5 class="widget-user-desc"></h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/logo_01.png" alt="Log In "> </div><div class="box-footer"> <div class="row"> <div class="col-sm-12 border-right" style="text-align:center;"><h2>Waiting for Login ...</h2> </div></div></div></div></div></div></div>';
+            }
+            else{
+                document.getElementById('login').innerHTML = '<div class="row"> <div class="col-sm-12"> <div class="box box-widget widget-user"> <div class="widget-user-header bg-aqua-active"> <h3 class="widget-user-username">Matteo Paracchino</h3> <h5 class="widget-user-desc">Web Developer</h5> </div><div class="widget-user-image"> <img class="img-circle" src="dist/img/profile.jpg" alt="User Avatar"> </div><div class="box-footer"> <div class="row"> <div class="col-sm-4 border-right"> <div class="description-block"> <h5 class="description-header">19/07/2016 16:31:44</h5> <span class="description-text">CHECKIN</span> </div></div><div class="col-sm-4 border-right"> </div><div class="col-sm-4"> <div class="description-block"> <h5 class="description-header">19/072016 18:22:12</h5> <span class="description-text">CHECKOUT</span> </div></div></div></div></div></div></div>';
+            }
+            */
+            if(result.user == -1){
+                 document.getElementById('workers').innerHTML = '120';
+            }
+            else if(result.user == 0){
+                document.getElementById('workers').innerHTML = '120';
+            }
+            else{
+                document.getElementById('workers').innerHTML = '121';
+            }
+        });
+    }
+    
+    //auto start
+    getStatusRoom();
+    getLoginUser();
+</script>    
+    
 </body>
 </html>
